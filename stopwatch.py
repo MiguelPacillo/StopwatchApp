@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.ttk import Separator
 
 window = Tk()
 window.title("Stopwatch App")
@@ -6,16 +7,19 @@ window.resizable(0, 0)
 window.configure(background="white")
 
 minlabel = Label(window, text="0", bg="white", fg="black", font="arial 20 bold")
-minlabel.grid(row=0, column=0, pady=(20, 0), padx=20)
+minlabel.grid(row=0, column=0, pady=(20, 0), padx=10)
 
 mintext = Label(window, text="Minutes", bg="white", fg="black", font="arial 20 bold")
-mintext.grid(row=1, column=0, padx=20)
+mintext.grid(row=1, column=0, padx=10)
 
 seclabel = Label(window, text="0", bg="white", fg="black", font="arial 20 bold")
-seclabel.grid(row=0, column=1, pady=(20, 0), padx=20)
+seclabel.grid(row=0, column=2, pady=(20, 0), padx=10)
 
 sectext = Label(window, text="Seconds", bg="white", fg="black", font="arial 20 bold")
-sectext.grid(row=1, column=1, padx=20)
+sectext.grid(row=1, column=2, padx=10)
+
+midline = Separator(window, orient="vertical")
+midline.grid(row=0, column=1, sticky="ns", rowspan=2)
 
 secs = -1
 mins = 0
@@ -52,6 +56,8 @@ def stopper():
     start = False
 
     stopbutt.configure(state=DISABLED, bg="grey")
+
+    clearbutt.after(1000)
     clearbutt.configure(state=NORMAL, bg="blue")
 
 
@@ -70,13 +76,13 @@ def clearer():
 
     start = True
 
+startbutt = Button(window, text="Start", bg="green", fg="white", font="arial 15 bold", command=counter, state=NORMAL)
+startbutt.grid(row=2, column=0, pady=20)
+
 stopbutt = Button(window, text="Stop", bg="grey", fg="white", font="arial 15 bold", command=stopper, state=DISABLED)
-stopbutt.grid(row=2, column=1, pady=20, padx=20)
+stopbutt.grid(row=2, column=1, pady=20)
 
 clearbutt = Button(window, text="Clear", bg="grey", fg="white", font="arial 15 bold", command=clearer, state=DISABLED)
-clearbutt.grid(row=3, column=1, pady=20, padx=20)
-
-startbutt = Button(window, text="Start", bg="green", fg="white", font="arial 15 bold", command=counter, state=NORMAL)
-startbutt.grid(row=2, column=0, pady=20, padx=20)
+clearbutt.grid(row=2, column=2, pady=20)
 
 window.mainloop()
