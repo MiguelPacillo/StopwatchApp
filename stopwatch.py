@@ -1,11 +1,13 @@
 from tkinter import *
 from tkinter.ttk import Separator
 
+# Draw tkinter window
 window = Tk()
 window.title("Stopwatch App")
 window.resizable(0, 0)
 window.configure(background="white")
 
+# Adds a label for minutes and seconds as well as captions
 minlabel = Label(window, text="0", bg="white", fg="black", font="arial 20 bold")
 minlabel.grid(row=0, column=0, pady=(20, 0), padx=10)
 
@@ -21,12 +23,13 @@ sectext.grid(row=1, column=2, padx=10)
 midline = Separator(window, orient="vertical")
 midline.grid(row=0, column=1, sticky="ns", rowspan=2)
 
+# Seconds starts at -1 because when you press Start it immediately adds a second for some reason
 secs = -1
 mins = 0
 
 start = True
 
-def counter():
+def counter():  # Function for counting up the time when you press start
 
     global secs, mins, start
 
@@ -49,7 +52,7 @@ def counter():
         startbutt.configure(state=DISABLED, bg="grey")
         stopbutt.configure(state=NORMAL, bg="red")
 
-def stopper():
+def stopper():  # Function for stopping the count
 
     global start
 
@@ -57,11 +60,11 @@ def stopper():
 
     stopbutt.configure(state=DISABLED, bg="grey")
 
-    clearbutt.after(1000)
+    clearbutt.after(1000)  # To prevent a bug where if you press clear too quickly it'll start the counter
     clearbutt.configure(state=NORMAL, bg="blue")
 
 
-def clearer():
+def clearer():  # Function for clearing the counter
 
     global start, secs, mins
 
