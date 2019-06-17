@@ -28,14 +28,15 @@ secs = -1
 mins = 0
 
 start = True
+tick = None
 
 def counter():  # Function for counting up the time when you press start
 
-    global secs, mins, start
+    global secs, mins, start, tick
 
     if start is True:
 
-        seclabel.after(1000, counter)
+        tick = seclabel.after(1000, counter)
 
         secs += 1
 
@@ -56,11 +57,11 @@ def stopper():  # Function for stopping the count
 
     global start
 
+    seclabel.after_cancel(tick)  # Prevents tick from being called again before 1000 ms
+
     start = False
 
     stopbutt.configure(state=DISABLED, bg="grey")
-
-    clearbutt.after(1000)  # To prevent a bug where if you press clear too quickly it'll start the counter
     clearbutt.configure(state=NORMAL, bg="blue")
 
 
